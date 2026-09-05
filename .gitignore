@@ -1,28 +1,41 @@
-# Python
+# Byte-compiled / cache
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
+.Python
+build/
+dist/
 *.egg-info/
 .eggs/
-dist/
-build/
+pip-wheel-metadata/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Test / type / lint caches
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .coverage
 htmlcov/
 .tox/
-.venv/
-venv/
-env/
-
-# Env / secrets
-.env
-.env.local
-*.pem
+.nox/
 
 # IDE / OS
 .idea/
 .vscode/
-.DS_Store
 *.swp
+.DS_Store
+
+# Local data
+data/
+*.db
+*.sqlite3
