@@ -14,6 +14,7 @@ dependencies = [
     "alembic>=1.13",
     "httpx>=0.27",
     "python-dotenv>=1.0",
+    "twilio>=9.0",
 ]
 
 [project.optional-dependencies]
