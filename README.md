@@ -48,7 +48,7 @@ After Pages is on (and this branch is merged to the default branch Pages uses), 
 - Privacy: `https://praneethuppari.github.io/fantasy-sidekick/privacy.html`
 - Terms: `https://praneethuppari.github.io/fantasy-sidekick/terms.html`
 
-Replace the GitHub Issues contact with a monitored email on those pages before submitting the campaign if Twilio asks for one.
+Replace the contact email on those pages only if you want a different public address for Twilio.
 ## Local setup
 
 **Prerequisites:** Python 3.11+, git, Docker (for Postgres)
