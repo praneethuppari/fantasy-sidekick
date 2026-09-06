@@ -11,6 +11,8 @@ def test_version() -> None:
 def test_settings_defaults(monkeypatch) -> None:
     monkeypatch.delenv("APP_ENV", raising=False)
     monkeypatch.delenv("LOG_LEVEL", raising=False)
+    monkeypatch.delenv("DATABASE_URL", raising=False)
     settings = Settings.from_env()
     assert settings.app_env == "development"
     assert settings.log_level == "INFO"
+    assert "fantasy_sidekick" in settings.database_url
