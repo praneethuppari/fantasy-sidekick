@@ -30,6 +30,7 @@ fantasy-sidekick/
 ├── .gitignore
 ├── src/fantasy_sidekick/   # application package
 │   ├── sleeper/            # Sleeper HTTP client
+│   ├── sms/                # Twilio plain-text SMS client
 │   ├── db/                 # models + session
 │   └── sync/               # league / players upsert orchestration
 ├── tests/                  # pytest
@@ -57,6 +58,16 @@ alembic upgrade head
 fantasy-sidekick          # prints version
 pytest
 ```
+
+## Send a test SMS (Twilio)
+
+Fill `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, and `TWILIO_FROM_NUMBER` in `.env`, then:
+
+```bash
+fantasy-sidekick send-sms --to +15551234567 --message "Fantasy Sidekick test"
+```
+
+Prints the Twilio message SID on success. This is a temporary CLI for verifying outbound SMS — no DB logging yet.
 
 ## Sync Sleeper data
 
