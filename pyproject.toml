@@ -8,7 +8,13 @@ version = "0.1.0"
 description = "SMS coach for fantasy football beginners (backend-only Python)."
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "sqlalchemy>=2.0",
+    "psycopg[binary]>=3.1",
+    "alembic>=1.13",
+    "httpx>=0.27",
+    "python-dotenv>=1.0",
+]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]

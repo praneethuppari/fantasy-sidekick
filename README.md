@@ -13,6 +13,7 @@ Friends in a league who are new to fantasy (and football) need simple, timely te
 | Python 3.11+ | Matches your background; great for jobs, SMS APIs, and data |
 | `src/` layout | Packaged install; keeps imports clean |
 | Env-based config | Secrets stay out of git |
+| Postgres + SQLAlchemy | Local league/roster storage for sync and reminders |
 | pytest | Lightweight verification from day one |
 
 **Not chosen (for now):** FastAPI/web UI (you asked for no frontend), serverless (extra ops for a personal coach).
@@ -23,16 +24,21 @@ Friends in a league who are new to fantasy (and football) need simple, timely te
 fantasy-sidekick/
 ├── README.md
 ├── pyproject.toml
+├── docker-compose.yml      # local Postgres
+├── alembic/                # schema migrations
 ├── .env.example
 ├── .gitignore
 ├── src/fantasy_sidekick/   # application package
+│   ├── sleeper/            # Sleeper HTTP client
+│   ├── db/                 # models + session
+│   └── sync/               # league / players upsert orchestration
 ├── tests/                  # pytest
 └── scripts/                # local helper scripts
 ```
 
 ## Local setup
 
-**Prerequisites:** Python 3.11+, git
+**Prerequisites:** Python 3.11+, git, Docker (for Postgres)
 
 ```bash
 cd ~/Projects/fantasy-sidekick
@@ -45,9 +51,30 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 
 cp .env.example .env
-fantasy-sidekick          # or: python -m fantasy_sidekick
+docker compose up -d
+alembic upgrade head
+
+fantasy-sidekick          # prints version
 pytest
 ```
+
+## Sync Sleeper data
+
+Layered flow: CLI → `sync.*` → `sleeper.client` + SQLAlchemy upserts.
+
+```bash
+# Pull one league (users, league_users, rosters)
+fantasy-sidekick sync-league --league-id 1392647678189395968
+
+# Optional: full NFL players catalog (large; run infrequently)
+fantasy-sidekick sync-players
+```
+
+### Manual verify (upsert)
+
+1. Run `sync-league` for Odysseus’s Crew (`1392647678189395968`).
+2. Confirm one `leagues` row, 12 `rosters`, and matching `users` / `league_users`.
+3. Run the same command again — row counts stay the same (upsert, not duplicates); fields refresh.
 
 ## Branching structure
 
