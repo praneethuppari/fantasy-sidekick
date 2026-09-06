@@ -26,6 +26,7 @@ fantasy-sidekick/
 ├── pyproject.toml
 ├── docker-compose.yml      # local Postgres
 ├── alembic/                # schema migrations
+├── docs/                   # GitHub Pages: privacy + terms (Twilio A2P)
 ├── .env.example
 ├── .gitignore
 ├── src/fantasy_sidekick/   # application package
@@ -37,6 +38,17 @@ fantasy-sidekick/
 └── scripts/                # local helper scripts
 ```
 
+## A2P / Twilio campaign legal pages
+
+Static Privacy Policy and Terms for 10DLC campaign registration live under `docs/` and are meant to be published with **GitHub Pages** (Settings → Pages → Deploy from branch → `/docs`).
+
+After Pages is on (and this branch is merged to the default branch Pages uses), use:
+
+- Website: `https://praneethuppari.github.io/fantasy-sidekick/`
+- Privacy: `https://praneethuppari.github.io/fantasy-sidekick/privacy.html`
+- Terms: `https://praneethuppari.github.io/fantasy-sidekick/terms.html`
+
+Replace the GitHub Issues contact with a monitored email on those pages before submitting the campaign if Twilio asks for one.
 ## Local setup
 
 **Prerequisites:** Python 3.11+, git, Docker (for Postgres)
